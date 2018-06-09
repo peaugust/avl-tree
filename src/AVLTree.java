@@ -200,32 +200,32 @@ public class AVLTree {
      */
     private AVLNode rotacaoEsquerda(AVLNode inicial) {
 
-        AVLNode direita = inicial.getDireita();
-        direita.setPai(inicial.getPai());
+        AVLNode pivot = inicial.getDireita();
+        pivot.setPai(inicial.getPai());
 
-        inicial.setDireita(direita.getEsquerda());
+        inicial.setDireita(pivot.getEsquerda());
 
         if (inicial.getDireita() != null) {
             inicial.getDireita().setPai(inicial);
         }
 
-        direita.setEsquerda(inicial);
-        inicial.setPai(direita);
+        pivot.setEsquerda(inicial);
+        inicial.setPai(pivot);
 
-        if (direita.getPai() != null) {
+        if (pivot.getPai() != null) {
 
-            if (direita.getPai().getDireita() == inicial) {
-                direita.getPai().setDireita(direita);
+            if (pivot.getPai().getDireita() == inicial) {
+                pivot.getPai().setDireita(pivot);
 
-            } else if (direita.getPai().getEsquerda() == inicial) {
-                direita.getPai().setEsquerda(direita);
+            } else if (pivot.getPai().getEsquerda() == inicial) {
+                pivot.getPai().setEsquerda(pivot);
             }
         }
 
         setBalanceamento(inicial);
-        setBalanceamento(direita);
+        setBalanceamento(pivot);
 
-        return direita;
+        return pivot;
     }
 
     /**
@@ -236,32 +236,33 @@ public class AVLTree {
      */
     public AVLNode rotacaoDireita(AVLNode inicial) {
 
-        AVLNode esquerda = inicial.getEsquerda();
-        esquerda.setPai(inicial.getPai());
+        AVLNode pivot = inicial.getEsquerda();
+        pivot.setPai(inicial.getPai());
 
-        inicial.setEsquerda(esquerda.getDireita());
+        inicial.setEsquerda(pivot.getDireita());
 
         if (inicial.getEsquerda() != null) {
             inicial.getEsquerda().setPai(inicial);
         }
 
-        esquerda.setDireita(inicial);
-        inicial.setPai(esquerda);
+        pivot.setDireita(inicial);
+        inicial.setPai(pivot);
 
-        if (esquerda.getPai() != null) {
+        if (pivot.getPai() != null) {
 
-            if (esquerda.getPai().getDireita() == inicial) {
-                esquerda.getPai().setDireita(esquerda);
+            if (pivot.getPai().getEsquerda() == inicial) {
+                pivot.getPai().setEsquerda(pivot);
 
-            } else if (esquerda.getPai().getEsquerda() == inicial) {
-                esquerda.getPai().setEsquerda(esquerda);
+            } else if  (pivot.getPai().getDireita() == inicial) {
+                pivot.getPai().setDireita(pivot);
             }
         }
 
-        setBalanceamento(inicial);
-        setBalanceamento(esquerda);
 
-        return esquerda;
+        setBalanceamento(inicial);
+        setBalanceamento(pivot);
+
+        return pivot;
     }
 
     /**
